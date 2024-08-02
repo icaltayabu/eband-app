@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Chatbot\ChatbotController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SplashController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.master');
-});
+// Route::get('/', function () {
+//     return view('layouts.master');
+// });
+
+Route::get('/', [SplashController::class, 'index']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/authentication', [LoginController::class, 'authentication']);
+
+Route::resource('/home', HomeController::class);
+Route::get('/penerbangan', [HomeController::class, 'penerbangan']);
+Route::get('/personal', [HomeController::class, 'personal']);
+
+Route::resource('/chatbot', ChatbotController::class);
