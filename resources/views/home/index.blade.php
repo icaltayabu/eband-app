@@ -7,7 +7,8 @@
             <h4 style="color: white;">Welcome to eband</h4>
             <a href="#" data-menu="menu-main" class="bg-fade-highlight-light shadow-xl preload-img"
                 data-src="{{ asset('assets/images/avatars/5s.png') }}"></a>
-            <h4 style="margin-top: 20px; color:white"><a href="{{ url('personal') }}" style="color: white">Personal dashboard</a></h4>
+            <h4 style="margin-top: 20px; color:white"><a href="{{ url('personal') }}" style="color: white">Personal
+                    dashboard</a></h4>
         </div>
         <div class="card header-card shape-rounded" data-card-height="210">
             <div class="card-overlay bg-highlight opacity-95"></div>
@@ -31,12 +32,26 @@
             </div>
         </div>
         <div class="container">
-            <a href="{{ url('penerbangan') }}" class="btn btn-m mt-4 mb-4 btn-full rounded-sm text-uppercase font-900"
-                style="width: 335px; background-color: #5539FF; font-style: poppins">tambah penerbangan</a>
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                    <a href="{{ url('penerbangan') }}"
+                        class="btn btn-primary mt-4 mb-4 w-100 rounded-sm text-uppercase font-900"
+                        style="background-color: #5539FF; font-family: 'Poppins', sans-serif;">
+                        tambah penerbangan
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="container">
-            <a href="{{ url('chatbot') }}" class="btn btn-m mt-4 mb-4 btn-full rounded-sm text-uppercase font-900"
-                style="width: 335px; background-color: #9585FA; font-style: poppins">tanya ke Ai chatbot</a>
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                    <a href="{{ url('chatbot') }}"
+                        class="btn btn-primary mt-4 mb-4 w-100 rounded-sm text-uppercase font-900"
+                        style="background-color: #9585FA; font-family: 'Poppins', sans-serif;">
+                        tanya ke Ai chatbot
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

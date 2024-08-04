@@ -69,11 +69,18 @@
                             <i class="fa fa-times disabled invalid color-red-dark"></i>
                             <i class="fa fa-check disabled valid color-green-dark"></i>
                         </div>
-                        <button type="submit"
-                            class="btn btn-m mt-4 mb-4 btn-full bg-green-dark rounded-sm text-uppercase font-900"
-                            style="width: 300px">Login</button>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-8 col-lg-6">
+                                    <button type="submit"
+                                        class="btn btn-primary mt-4 mb-4 w-100 rounded-sm text-uppercase font-900"
+                                        style="background-color: #42D83F; max-width: 100%;">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
-
                 </div>
             </div>
 

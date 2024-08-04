@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Chatbot\ChatbotController;
+use App\Http\Controllers\Detail_Maskapai\CitilinkController;
+use App\Http\Controllers\Detail_Maskapai\GarudaController;
+use App\Http\Controllers\Detail_Maskapai\LionAirController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SplashController;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +34,16 @@ Route::get('/penerbangan', [HomeController::class, 'penerbangan']);
 Route::get('/personal', [HomeController::class, 'personal']);
 
 Route::resource('/chatbot', ChatbotController::class);
+
+Route::resource('/kelas_citilink', CitilinkController::class);
+Route::get('/kelas_reguler_citilink', [CitilinkController::class, 'kelas_reguler']);
+Route::get('/kelas_vip_citilink', [CitilinkController::class, 'kelas_vip']);
+
+Route::resource('/kelas_garuda', GarudaController::class);
+Route::get('/kelas_reguler_garuda', [GarudaController::class, 'kelas_reguler']);
+Route::get('/kelas_vip_garuda', [GarudaController::class, 'kelas_vip']);
+
+Route::resource('/kelas_lion_air', LionAirController::class);
+Route::get('/kelas_reguler_lion_air', [LionAirController::class, 'kelas_reguler']);
+Route::get('/kelas_vip_lion_air', [LionAirController::class, 'kelas_vip']);
+
