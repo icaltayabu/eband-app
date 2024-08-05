@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Detail_Maskapai;
 
 use App\Http\Controllers\Controller;
+use App\Models\Penerbangan;
 use Illuminate\Http\Request;
 
 class GarudaController extends Controller
@@ -12,7 +13,8 @@ class GarudaController extends Controller
      */
     public function index()
     {
-        return view('pages.detail_maskapai.garuda.index');
+        $penerbangan = Penerbangan::paginate('3');
+        return view('pages.detail_maskapai.garuda.index', compact('penerbangan'));
     }
 
     /**
@@ -28,7 +30,20 @@ class GarudaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'tgl_penerbangan' => '',
+            'jam_terbang' => '',
+            'kode_penerbangan' => '',
+            'asal' => '',
+            'tujuan' => '',
+            'terminal' => '',
+            'pengingat' => ''
+        ]);
+
+        Penerbangan::create($validatedData);
+
+        return redirect()->route('kelas_garuda.index')
+            ->with('success', 'Data penerbangan berhasil disimpan');
     }
 
     /**

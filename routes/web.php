@@ -33,7 +33,6 @@ Route::resource('/home', HomeController::class);
 Route::get('/penerbangan', [HomeController::class, 'penerbangan']);
 Route::get('/personal', [HomeController::class, 'personal']);
 
-
 Route::resource('/kelas_citilink', CitilinkController::class);
 Route::get('/kelas_reguler_citilink', [CitilinkController::class, 'kelas_reguler']);
 Route::get('/kelas_vip_citilink', [CitilinkController::class, 'kelas_vip']);

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Penerbangan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -26,6 +27,16 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'level' => 'administrator',
             'password' => bcrypt('password'),
+        ]);
+
+        Penerbangan::create([
+            'tgl_penerbangan' => '2022-01-01',
+            'jam_terbang' => '10:00',
+            'kode_penerbangan' => 'SUB001',
+            'asal' => 'SUB',
+            'tujuan' => 'CGK',
+            'terminal' => 'Gate 10',
+            'pengingat' => '6 jam',
         ]);
     }
 }
