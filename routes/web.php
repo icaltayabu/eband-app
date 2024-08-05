@@ -33,7 +33,6 @@ Route::resource('/home', HomeController::class);
 Route::get('/penerbangan', [HomeController::class, 'penerbangan']);
 Route::get('/personal', [HomeController::class, 'personal']);
 
-Route::resource('/chatbot', ChatbotController::class);
 
 Route::resource('/kelas_citilink', CitilinkController::class);
 Route::get('/kelas_reguler_citilink', [CitilinkController::class, 'kelas_reguler']);
@@ -47,3 +46,6 @@ Route::resource('/kelas_lion_air', LionAirController::class);
 Route::get('/kelas_reguler_lion_air', [LionAirController::class, 'kelas_reguler']);
 Route::get('/kelas_vip_lion_air', [LionAirController::class, 'kelas_vip']);
 
+// Route::get('/chatbot', [ChatbotController::class, 'index']);
+Route::post('chat', [ChatbotController::class, 'chat'])->name('chat');
+Route::resource('/chatbot', ChatbotController::class);

@@ -1,24 +1,37 @@
 <!DOCTYPE HTML>
 <html lang="en">
 
-<!-- Mirrored from www.enableds.com/products/azures/v35/page-chat.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Aug 2024 07:55:05 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>form Chatbot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Chatbot</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/bootstrap.css') }}">
     <link
-        href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900|Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap"
+        href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900|Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/css/fontawesome-all.min.css') }}">
     <link rel="manifest" href="{{ asset('assets/_manifest.json') }}" data-pwa-version="set_in_manifest_and_pwa_js">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/app/icons/icon-192x192.png') }}">
+    <style>
+        .speech-bubble {
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            max-width: 80%;
+        }
+
+        .speech-left {
+            background-color: #e0e0e0;
+            align-self: flex-start;
+        }
+
+        .speech-right {
+            background-color: #0084ff;
+            color: white;
+            align-self: flex-end;
+        }
+    </style>
 </head>
 
 <body class="theme-light">
@@ -42,15 +55,15 @@
                 <a href="#" data-menu="menu-upload" class="bg-gray-dark ms-2"><i class="fa fa-plus mt-2"></i></a>
             </div>
             <div class="flex-fill speach-input">
-                <input type="text" class="form-control" placeholder="Enter your Message here">
+                <input type="text" id="message" class="form-control" placeholder="Enter your Message here">
             </div>
             <div class="ms-3 speach-icon">
-                <a href="#" class="bg-blue-dark me-2"><i class="fa fa-arrow-up mt-2"></i></a>
+                <a href="#" id="send-message" class="bg-blue-dark me-2"><i class="fa fa-arrow-up mt-2"></i></a>
             </div>
         </div>
         <div class="page-content">
             <div class="page-title page-title-small">
-                <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>Ai Chatbot</h2>
+                <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>AI Chatbot</h2>
                 <a href="#" data-menu="menu-main" class="bg-fade-highlight-light shadow-xl preload-img"
                     data-src="{{ asset('assets/images/avatars/5s.png') }}"></a>
             </div>
@@ -59,46 +72,80 @@
                 <div class="card-overlay dark-mode-tint"></div>
                 <div class="card-bg preload-img" data-src="images/pictures/20s.jpg"></div>
             </div>
-            <div class="content mt-5 pt-3">
-                <div class="speech-bubble speech-right color-black"><b>Ai Chatbot</b> <br>
-                    <span>Selamat pagi! saya adalah Ai Chatbot dari eband! silahkan ketik pertanyaan anda</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-bubble speech-left bg-highlight">
-                    <span>Apakah saya boleh membawa korek api dan pisau ke kabin pesawat?</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-bubble speech-right color-black"><b>Ai Chatbot</b> <br>
-                    <span>halo! menurut PM 31 TAHUN 2013,
-                        penumpang di izinkan untuk membawa
-                        satu korek api gas yang melekat pada
-                        setiap orang tidak mengandung bahan
-                        bakar cair yang tidak terserap, tapi
-                        tidak berlaku pada korek api isi ulang
-                        dan korek api batangan. Sedangkan
-                        untuk pisau sesuai dengan PM 127 TAHUN
-                        2015, pisau dikategorikan sebagai senjata
-                        atau Dangerous Article yang mana jika
-                        ingin dibawa ke pesawat hanya bisa
-                        lewat bagasi penumpang.</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-bubble speech-left bg-highlight">
-                    Terima kasih...
-                </div>
+            <div class="content mt-5 pt-3" id="chat-container">
+                <!-- Chat messages will be dynamically inserted here -->
             </div>
         </div>
-
-        <div id="menu-share" class="menu menu-box-bottom menu-box-detached rounded-m"
-            data-menu-load="menu-share.html" data-menu-height="420" data-menu-effect="menu-over">
-        </div>
+        <div id="menu-share" class="menu menu-box-bottom menu-box-detached rounded-m" data-menu-load="menu-share.html"
+            data-menu-height="420" data-menu-effect="menu-over"></div>
         <div id="menu-highlights" class="menu menu-box-bottom menu-box-detached rounded-m"
-            data-menu-load="menu-colors.html" data-menu-height="510" data-menu-effect="menu-over">
-        </div>
+            data-menu-load="menu-colors.html" data-menu-height="510" data-menu-effect="menu-over"></div>
         <div id="menu-main" class="menu menu-box-right menu-box-detached rounded-m" data-menu-width="260"
-            data-menu-load="menu-main.html" data-menu-active="nav-pages" data-menu-effect="menu-over">
-        </div>
+            data-menu-load="menu-main.html" data-menu-active="nav-pages" data-menu-effect="menu-over"></div>
     </div>
     <script type="text/javascript" src="{{ asset('assets/scripts/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/scripts/custom.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sendButton = document.getElementById('send-message');
+            const messageInput = document.getElementById('message');
+            const chatContainer = document.getElementById('chat-container');
+
+            function scrollToBottom() {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            function addMessage(message, sender = 'user') {
+                const messageClass = sender === 'user' ? 'speech-left' : 'speech-right';
+                chatContainer.innerHTML += `
+            <div class="speech-bubble ${messageClass}">
+                ${message}
+            </div>
+            <div class="clearfix"></div>
+        `;
+                scrollToBottom();
+            }
+
+            sendButton.addEventListener('click', function() {
+                const message = messageInput.value.trim();
+                if (!message) return;
+
+                addMessage(message, 'user');
+
+                messageInput.value = '';
+
+                fetch('chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            message
+                        })
+                    })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        addMessage(`<b>AI Chatbot</b> <br><span>${data.response}</span>`, 'bot');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        addMessage(
+                            `<b>AI Chatbot</b> <br><span>Sorry, something went wrong. Please try again.</span>`,
+                            'bot');
+                    });
+            });
+
+            // Optionally, handle Enter key for sending messages
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+        });
+    </script>
 </body>
+
+</html>
