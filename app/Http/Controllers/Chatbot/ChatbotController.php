@@ -17,47 +17,6 @@ class ChatbotController extends Controller
         return view('pages.chatbot.index');
     }
 
-    public function chat(Request $request)
-    {
-        try {
-            $validatedData = $request->validate([
-                'message' => 'required|string|max:255',
-            ]);
-
-            $message = htmlspecialchars($request->input('message'));
-
-            if (empty($message)) {
-                return response()->json(['response' => "Sorry, the message cannot be empty."], 400);
-            }
-
-            $response = $this->generateResponse($message);
-
-            Chat::create([
-                'pertanyaan' => $message,
-                'jawaban' => $response,
-            ]);
-
-            return response()->json(['response' => $response]);
-        } catch (\Exception $e) {
-            Log::error('Chat Error: ' . $e->getMessage(), ['request' => $request->all()]);
-            return response()->json(['response' => 'An unexpected error occurred. Please try again.'], 500);
-        }
-    }
-
-
-
-    private function generateResponse($message)
-    {
-        $responses = [
-            'hi' => 'Hello!',
-            'how are you' => 'I am good, thank you!',
-            'bye' => 'Goodbye!',
-        ];
-
-        $messageLower = strtolower($message);
-        return $responses[$messageLower] ?? "Sorry, I don't understand that.";
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -72,7 +31,17 @@ class ChatbotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pertanyaan' => 'required|string|max:255',
+            'jawaban' => 'required|string',
+        ]);
+
+        $chat = new Chat;
+        $chat->pertanyaan = $request->input('pertanyaan');
+        $chat->jawaban = $request->input('jawaban');
+        $chat->save();
+
+        return redirect()->route('chatbot.index')->with('success', 'Data chat berhasil disimpan');
     }
 
     /**
@@ -105,5 +74,17 @@ class ChatbotController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function chat(Request $request)
+    {
+        $pertanyaan = $request->input('pertanyaan');
+        $chat = Chat::where('pertanyaan', 'like', '%' . $pertanyaan . '%')->first();
+
+        if (!$chat) {
+            return response()->json(['jawaban' => 'Maaf, saya tidak mengerti pertanyaan Anda.']);
+        }
+
+        return response()->json(['jawaban' => $chat->jawaban]);
     }
 }
