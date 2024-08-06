@@ -18,6 +18,7 @@ class Penerbangan extends Model
         'asal',
         'tujuan',
         'terminal',
+        'gate',
         'pengingat',
     ];
 }

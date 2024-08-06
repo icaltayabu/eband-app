@@ -34,7 +34,7 @@
                                             <p style="margin: 0; color:black; margin-left: auto; margin-right: 20px">06:00
                                             </p>
                                             <p style="margin: 0; color:black; margin-left: auto; margin-right: 20px">
-                                                <b>GATE</b>
+                                                <b>Terminal {{ $item->terminal }}</b>
                                             </p>
                                         </div>
                                         <div style="display: flex; gap: 20px; width: 100%;">
@@ -42,7 +42,7 @@
                                             <p style="margin: 0; color:black">========</p>
                                             <p style="margin: 0; color:black">{{ $item->tujuan }}</p>
                                             <p style="margin: 0; color:black; margin-left: auto; margin-right: 30px">
-                                                <b>{{ $item->terminal }}</b>
+                                                <b>Gate {{ $item->gate }}</b>
                                             </p>
                                         </div>
                                     </div>
@@ -60,18 +60,19 @@
         </div>
     </div>
 
-    <div id="menu-signup" class="menu menu-box-modal rounded-m" data-menu-height="450" data-menu-width="325">
+    <div id="menu-signup" class="menu menu-box-modal rounded-m" data-menu-height="460" data-menu-width="325">
         <form action="{{ route('kelas_citilink.store') }}" method="POST">
-            @csrf   
+            @csrf
             <div class="me-3 ms-3 mt-3">
                 <h1 class="font-500 font-20 mb-0 text-center">Tambah Penerbangan</h1>
                 <form action="">
                     <div class="input-style no-borders has-icon validate-field mb-4 mt-3">
                         <div class="col-md-4 position-relative">
                             <label for="tgl_penerbangan" class="form-label">tanggal Penerbangan</label>
-                            <input type="date" class="form-control" id="tgl_penerbangan" name="tgl_penerbangan">
+                            <input type="date" class="form-control" id="tgl_penerbangan" name="tgl_penerbangan" placeholder="Tanggal">
                         </div>
                     </div>
+                    
                     <div style="display: flex; flex-wrap: wrap;">
                         <div class="input-style no-borders has-icon validate-field mb-4 mt-3"
                             style="flex: 1; margin-right: 10px;">
@@ -113,9 +114,15 @@
                                 placeholder="Terminal">
                         </div>
                         <div class="col-md-4 position-relative" style="flex: 1;">
-                            <label for="pengingat" class="form-label">Pengingat jam</label>
-                            <input type="text" class="form-control" id="pengingat" name="pengingat"
-                                placeholder="Pengingat jam">
+                            <label for="gate" class="form-label">Gate</label>
+                            <input type="text" class="form-control" id="gate" name="gate"
+                                placeholder="Gate">
+                        </div>
+                    </div>
+                    <div class="input-style no-borders has-icon validate-field mb-4 mt-3">
+                        <div class="col-md-4 position-relative">
+                            <label for="pengingat" class="form-label">Pengingat</label>
+                            <input type="text" class="form-control" id="pengingat" name="pengingat" placeholder="Pengingat jam">
                         </div>
                     </div>
                     <button type="submit"

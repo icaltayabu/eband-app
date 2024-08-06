@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('asal', ['CGK', 'SUB']);
             $table->enum('tujuan', ['CGK', 'SUB']);
             $table->string('terminal')->nullable();
+            $table->string('gate')->nullable();
             $table->string('pengingat')->nullable();
             $table->timestamps();
         });

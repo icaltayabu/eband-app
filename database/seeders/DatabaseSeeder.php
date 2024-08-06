@@ -35,7 +35,8 @@ class DatabaseSeeder extends Seeder
             'kode_penerbangan' => 'SUB001',
             'asal' => 'SUB',
             'tujuan' => 'CGK',
-            'terminal' => 'Gate 10',
+            'terminal' => '1',
+            'gate' => '10',
             'pengingat' => '6 jam',
         ]);
     }
